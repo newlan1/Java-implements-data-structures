@@ -9,7 +9,20 @@ package com.day1.queue;
  */
 public class ArrayQueue {
     public static void main(String[] args) {
-        new ArrayQueueClass(10);
+        ArrayQueueClass arrayQueue = new ArrayQueueClass(10);
+        arrayQueue.addQueue(10);
+        arrayQueue.addQueue(20);
+        arrayQueue.addQueue(30);
+        arrayQueue.addQueue(15);
+        arrayQueue.getAllQueue();
+
+
+
+        //存在问题:目前数组使用一次就不能用， 没有达到复用的效果
+
+
+        //解决方案:将这个数组使用算法，改进成一个环形的队列 取模：%   见：
+
     }
 }
 
@@ -64,8 +77,7 @@ class ArrayQueueClass{
         {
             throw new RuntimeException("队列为空，无法输出");
         }
-        for (int i:arr)
-        {
+        for (int i = 0; i < arr.length; i++) {
             System.out.println("arr["+i+"]="+arr[i]);
         }
     }
@@ -74,7 +86,7 @@ class ArrayQueueClass{
     public int headQueue(){
         if(isEmpty())
         {
-            throw new RuntimeException("队列为空，无法输出");
+            throw new RuntimeException("headqueue:队列为空，无法输出");
         }
         return arr[front+1];
 
