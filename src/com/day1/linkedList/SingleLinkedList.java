@@ -1,4 +1,8 @@
-package com.day1.linkedList;/**
+package com.day1.linkedList;
+
+import java.util.Stack;
+
+/**
 @author lance
 @Description 
 @create 2022-02-06 17:49
@@ -24,12 +28,19 @@ package com.day1.linkedList;/**
         singleLinked.allList();
 
 
-        System.out.println("有效个数为:" + SingleLinkedList.getLength(singleLinked.getHead()));
-        int index=3;
+        //System.out.println("有效个数为:" + SingleLinkedList.getLength(singleLinked.getHead()));
+       // int index=3;
 
         //查到倒数第K个元素
-        System.out.println("查到倒数第"+index+"个元素为:" + findLastIndexNode(singleLinked.getHead(), index));
+        //System.out.println("查到倒数第"+index+"个元素为:" + findLastIndexNode(singleLinked.getHead(), index));
 
+       // System.out.println("针对单链表的反转测试：");
+
+       // reversetlist(heroNode1);
+
+        System.out.println("反转后的单链表显示:");
+        reversePrint(singleLinked.getHead());
+       // singleLinked.allList();
 
     }
     //得到有效节点的个数
@@ -46,7 +57,7 @@ package com.day1.linkedList;/**
         }
         return length;
     }
-    //查找倒数第K个元素的值
+    //查找倒数第K个元素的值  //新浪面试题
     public static HeroNode findLastIndexNode(HeroNode head, int index) {
 
 
@@ -72,6 +83,53 @@ package com.day1.linkedList;/**
         }
 
         return cur;
+
+
+    }
+
+    //将单链表反转   腾讯面试题
+    public static void reversetlist(HeroNode head){
+        //当链表只有一个节点 或 没有节点时 不需要处理
+        if(head.next==null|| head.next.next==null){
+            return;
+
+        }
+        //定义一个辅助的指针  帮助我们遍历原来的链表
+        HeroNode cur= head.next;
+        HeroNode next=null;  //指向当前节点的下一个节点
+        HeroNode reverseHead=new HeroNode(0,"","");
+
+        //遍历
+        while(cur!=null){
+            next=cur.next; //先暂时保存当前节点的下一个节点
+            cur.next=reverseHead.next; //将cur的下一个节点指向新的链表的头部
+            reverseHead.next=cur;
+            cur=next;//让cur后移
+        }
+        //将head.next指向reversehead.next  实现单链表的反转
+        head.next=reverseHead.next;
+
+    }
+
+
+    //将单链表逆序  百度面试题
+    public static void reversePrint(HeroNode head){
+
+        HeroNode cur=head.next;
+
+
+        Stack<HeroNode> stack=new Stack<>();
+
+        while (cur!=null){
+            stack.push(cur);
+
+            cur=cur.next;
+        }
+
+        //打印
+        while (stack.size()>0){
+            System.out.println(stack.pop());
+        }
 
 
     }
